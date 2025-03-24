@@ -37,3 +37,23 @@ export const transformQualyData = (qualyData: any) => {
         qualy: formattedRaceResult,
     };
 };
+
+export const transformSprintData = (sprintQualyData: any, sprintData: any) => {
+    const formattedSprintPoleResult = {
+        driver: sprintQualyData.races.sprintQualyResults[0].driverId,
+        team: sprintQualyData.races.sprintQualyResults[0].teamId,
+        time: sprintQualyData.races.sprintQualyResults[0].sq3
+    }
+
+    const formattedSprintResult = sprintData.races.sprintRaceResults.map((item: any) => ({
+        position: item.position,
+        driver: item.driver.driverId,
+        team: item.team.teamId,
+        time: item.time,
+    }));
+
+    return {
+        pole: formattedSprintPoleResult,
+        sprint: formattedSprintResult,
+    };
+};
