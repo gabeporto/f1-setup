@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { fetchRaceData } from '../../utils/race/fetchRaceData';
-import { transformRaceData } from '../../utils/race/transformRaceData';
+import { transformRaceData } from '../../utils/data/transformData';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { year, race } = req.query;
