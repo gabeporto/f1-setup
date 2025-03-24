@@ -25,7 +25,7 @@ export const transformQualyData = (qualyData: any) => {
         time: qualyData.races.qualyResults[0].q3
     }
 
-    const formattedRaceResult = qualyData.races.qualyResults.map((item: any) => ({
+    const formattedQualyResult = qualyData.races.qualyResults.map((item: any) => ({
         position: item.gridPosition,
         driver: item.driver.driverId,
         team: item.team.teamId,
@@ -34,7 +34,7 @@ export const transformQualyData = (qualyData: any) => {
 
     return {
         pole: formattedPoleResult,
-        qualy: formattedRaceResult,
+        qualy: formattedQualyResult,
     };
 };
 
@@ -55,5 +55,25 @@ export const transformSprintData = (sprintQualyData: any, sprintData: any) => {
     return {
         pole: formattedSprintPoleResult,
         sprint: formattedSprintResult,
+    };
+};
+
+export const transformSprintQualyData = (sprintQualyData: any) => {
+    const formattedSprintPoleResult = {
+        driver: sprintQualyData.races.sprintQualyResults[0].driverId,
+        team: sprintQualyData.races.sprintQualyResults[0].teamId,
+        time: sprintQualyData.races.sprintQualyResults[0].sq3
+    }
+
+    const formattedSprintQualyResult = sprintQualyData.races.sprintQualyResults.map((item: any) => ({
+        position: item.gridPosition,
+        driver: item.driver.driverId,
+        team: item.team.teamId,
+        time: item.sq3 ?? item.sq2 ?? item.sq1,
+    }));
+
+    return {
+        pole: formattedSprintPoleResult,
+        qualy: formattedSprintQualyResult,
     };
 };
