@@ -77,3 +77,40 @@ export const transformSprintQualyData = (sprintQualyData: any) => {
         qualy: formattedSprintQualyResult,
     };
 };
+
+export const transformFreePracticeData = (freePracticeData: any, practiceNumber: number) => {
+    const practiceResultsKey = `fp${practiceNumber}Results`;
+
+    const formattedFreePracticeResult = freePracticeData.races[practiceResultsKey]
+        .map((item: any) => {
+            const isTimeValid = item.time != null;
+            
+            return {
+                driver: item.driver.driverId,
+                team: item.team.teamId,
+                time: item.time,
+                isTimeValid,
+            };
+        })
+        .sort((a: any, b: any) => {
+            if (a.isTimeValid && !b.isTimeValid) {
+                return -1; 
+            }
+            if (!a.isTimeValid && b.isTimeValid) {
+                return 1; 
+            }
+
+            return 0;
+        });
+
+    const finalResults = formattedFreePracticeResult.map((item: any, index: number) => ({
+        position: index + 1,
+        driver: item.driver,
+        team: item.team,
+        time: item.time,
+    }));
+
+    return {
+        practice: finalResults,
+    };
+};
