@@ -1,5 +1,5 @@
 import axios from 'axios';
-import axiosInstance from '../axios/axiosInstance';
+import axiosInstance from '../../../utils/axios/axiosInstance';
 
 export const fetchSprintData = async (year: number, raceNumber: number, raceType: string) => {
     const url = `/${year}/${raceNumber}/sprint/${raceType}`;

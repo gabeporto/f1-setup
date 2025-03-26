@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { fetchFreePracticeData } from '../../utils/practice/fetchFreePracticeData';
+import { fetchFreePracticeData } from '../../services/f1/practice/fetchFreePracticeData';
 import { transformFreePracticeData } from '../../utils/data/transformData';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

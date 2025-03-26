@@ -1,5 +1,5 @@
 import axios from 'axios';
-import axiosInstance from '../axios/axiosInstance';
+import axiosInstance from '../../../utils/axios/axiosInstance';
 
 export const fetchFreePracticeData = async (year: number, raceNumber: number, practiceNumber: number) => {
     const url = `/${year}/${raceNumber}/fp${practiceNumber}`;
