@@ -1,23 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { sheets, SPREADSHEET_ID } from "../../services/google/googleSheets";
-import { fetchFreePracticeData } from "@/services/f1/practice/fetchFreePracticeData";
-import { transformFreePracticeData } from "@/utils/data/transformData";
-
-type PracticeEntry = {
-  position: number;
-  driver: string;
-  driverAcronym: string;
-  team: string;
-  time: string;
-};
-
-type PracticeData = {
-  practice: PracticeEntry[];
-};
-
-const formatPracticeDataForSheets = (data: PracticeData) => {
-  return data.practice.map(({ driver, team, time }) => [driver, team, time]);
-};
+import { fetchRaceResults } from "@/services/f1/fetchRaceResults";
+import { transformRaceResultsData } from "@/services/transform/transformRaceResultsData";
+import { ResultData } from "@/types/resultDataType";
+import { transformDataToUpdateSheet } from "@/utils/spreadsheet/formatDataToSpreadsheet";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -25,18 +11,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { range, year, raceNumber, freePracticeNumber } = req.body as { range: string; year: number; raceNumber: number; freePracticeNumber: number };
+    const { year, raceNumber, sheetName } = req.body as { year: number; raceNumber: number; sheetName: string };
 
-    const freePracticeData = await fetchFreePracticeData(Number(year), Number(raceNumber), Number(freePracticeNumber)); 
-    const transformedData = transformFreePracticeData(freePracticeData, Number(freePracticeNumber));
-    const spreadhSheetData = formatPracticeDataForSheets(transformedData as PracticeData);
-    
-    await sheets.spreadsheets.values.update({
+    const resultsData : (ResultData | null) = await fetchRaceResults(year, raceNumber); 
+    const transformedData = await transformRaceResultsData(resultsData);
+    const dataToUpdate = transformDataToUpdateSheet(sheetName, transformedData);
+
+    await sheets.spreadsheets.values.batchUpdate({
       spreadsheetId: SPREADSHEET_ID,
-      range: range,
-      valueInputOption: "RAW",
       requestBody: {
-        values: spreadhSheetData,
+        valueInputOption: "RAW",
+        data: dataToUpdate,
       },
     });
 
