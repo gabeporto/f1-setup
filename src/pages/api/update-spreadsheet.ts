@@ -41,7 +41,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     return res.status(200).json({ message: "Planilha atualizada com sucesso!" });
-  } catch (error: any) {
-    return res.status(500).json({ error: error.message });
+  } catch (error) {
+    console.error("Erro ao atualizar planilha:", error);
+    return res.status(500).json({ error: "Erro ao atualizar planilha." });
   }
 }

@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const transformedData = transformSprintQualyData(sprintQualyData);
         return res.status(200).json(transformedData);
     } catch (error) {
+        console.error("Erro ao buscar dados:", error);
         return res.status(500).json({error : 'Erro ao buscar dados da corrida classificatória da sprint.'});
     }
 }
