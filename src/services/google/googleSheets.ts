@@ -1,9 +1,10 @@
 import { google } from "googleapis";
-import path from "path";
 import { JWT } from "google-auth-library";
 
+const credentials = JSON.parse(process.env.GOOGLE_SHEETS_CREDENTIALS || '{}');
+
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(process.cwd(), "f1-setup-key-credentials.json"),
+  credentials: credentials,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
