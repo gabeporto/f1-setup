@@ -2,7 +2,6 @@ type Driver = {
     name: string;
     surname: string;
     shortName: string;
-    driverId?: string;
 };
 
 type Team = {
@@ -80,7 +79,7 @@ export const transformRaceData = (qualyData: QualyData, raceData: RaceData) => {
         driver: qualyData.races.qualyResults[0].driver.name + " " + qualyData.races.qualyResults[0].driver.surname,
         driverAcronym: qualyData.races.qualyResults[0].driver.shortName,
         team: qualyData.races.qualyResults[0].team.teamName,
-        time: qualyData.races.qualyResults[0].q3
+        time: qualyData.races.qualyResults[0].q3 ?? "-"
     }
 
     const formattedRaceResult = raceData.races.results.map((item) => ({
@@ -102,15 +101,15 @@ export const transformQualyData = (qualyData: QualyData) => {
         driver: qualyData.races.qualyResults[0].driver.name + " " + qualyData.races.qualyResults[0].driver.surname,
         driverAcronym: qualyData.races.qualyResults[0].driver.shortName,
         team: qualyData.races.qualyResults[0].team.teamName,
-        time: qualyData.races.qualyResults[0].q3
+        time: qualyData.races.qualyResults[0].q3 ?? "-"
     }
 
     const formattedQualyResult = qualyData.races.qualyResults.map((item) => ({
         position: item.gridPosition,
-        driver: item.driver.driverId,
+        driver: item.driver.name + " " + item.driver.surname,
         driverAcronym: item.driver.shortName,
         team: item.team.teamName,
-        time: item.q3 ?? item.q2 ?? item.q1,
+        time: item.q3 ?? item.q2 ?? item.q1 ?? "-",
     }));
 
     return {
@@ -124,7 +123,7 @@ export const transformSprintData = (sprintQualyData: SprintQualyData, sprintData
         driver: sprintQualyData.races.sprintQualyResults[0].driver.name + " " + sprintQualyData.races.sprintQualyResults[0].driver.surname,
         driverAcronym: sprintQualyData.races.sprintQualyResults[0].driver.shortName,
         team: sprintQualyData.races.sprintQualyResults[0].team.teamName,
-        time: sprintQualyData.races.sprintQualyResults[0].sq3
+        time: sprintQualyData.races.sprintQualyResults[0].sq3 ?? "-"
     }
 
     const formattedSprintResult = sprintData.races.sprintRaceResults.map((item) => ({
@@ -132,7 +131,7 @@ export const transformSprintData = (sprintQualyData: SprintQualyData, sprintData
         driver: item.driver.name + " " + item.driver.surname,
         driverAcronym: item.driver.shortName,
         team: item.team.teamName,
-        time: item.time,
+        time: item.time ?? "-",
     }));
 
     return {
@@ -146,15 +145,15 @@ export const transformSprintQualyData = (sprintQualyData: SprintQualyData) => {
         driver: sprintQualyData.races.sprintQualyResults[0].driver.name + " " + sprintQualyData.races.sprintQualyResults[0].driver.surname,
         driverAcronym: sprintQualyData.races.sprintQualyResults[0].driver.shortName,
         team: sprintQualyData.races.sprintQualyResults[0].team.teamName,
-        time: sprintQualyData.races.sprintQualyResults[0].sq3
+        time: sprintQualyData.races.sprintQualyResults[0].sq3 ?? "-"
     }
 
     const formattedSprintQualyResult = sprintQualyData.races.sprintQualyResults.map((item) => ({
         position: item.gridPosition,
-        driver: item.driver.driverId,
+        driver: item.driver.name + " " + item.driver.surname,
         driverAcronym: item.driver.shortName,
         team: item.team.teamName,
-        time: item.sq3 ?? item.sq2 ?? item.sq1,
+        time: item.sq3 ?? item.sq2 ?? item.sq1 ?? "-",
     }));
 
     return {
