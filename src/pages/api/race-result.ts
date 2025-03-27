@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { fetchRaceData } from '../../services/f1/race/fetchRaceData';
+import { fetchRaceData } from '../../services/f1/results/fetchRaceData';
 import { transformRaceData } from '../../utils/data/transformData';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
