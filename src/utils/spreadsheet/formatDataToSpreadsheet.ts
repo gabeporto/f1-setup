@@ -68,6 +68,12 @@ export function formatRaceForSheets(data: RaceData) {
     ]);
 }
 
+export function formatPartialRaceForSheets(data: RaceData) {
+    const poleDriver = data.pole.driverAcronym;
+    const top12DriversWithPole = [poleDriver, ...data.race.slice(0, 12).map(({ driverAcronym }) => driverAcronym)];
+    return top12DriversWithPole.map(driverAcronym => [driverAcronym]);
+}
+
 export const transformDataToUpdateSheet = (sheetName: string, transformedData: TransformedData) => {
     const dataToUpdate = [];
 
@@ -87,6 +93,9 @@ export const transformDataToUpdateSheet = (sheetName: string, transformedData: T
         if (transformedData.race) {
             dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.race, values: transformedData.race });
         }
+        if (transformedData.partialRace) {
+            dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.partialRace, values: transformedData.partialRace });
+        }
     } else {
         if (transformedData.freePracticeOne) {
             dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.fp1, values: transformedData.freePracticeOne });
@@ -102,6 +111,9 @@ export const transformDataToUpdateSheet = (sheetName: string, transformedData: T
         }
         if (transformedData.race) {
             dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.race, values: transformedData.race });
+        }
+        if (transformedData.partialRace) {
+            dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.partialRace, values: transformedData.partialRace });
         }
     }
 
