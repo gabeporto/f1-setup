@@ -1,6 +1,6 @@
 import { ResultData } from "@/types/resultDataType";
 import { transformFreePracticeData, transformQualyData, transformRaceData, transformSprintData, transformSprintQualyData } from "@/utils/data/transformData";
-import { formatDataForSheets, formatPartialRaceForSheets, formatQualyForSheets, formatRaceForSheets, formatSprintForSheets } from "@/utils/spreadsheet/formatDataToSpreadsheet";
+import { formatDataForSheets, formatPartialRaceForSheets, formatPartialSprintForSheets, formatQualyForSheets, formatRaceForSheets, formatSprintForSheets } from "@/utils/spreadsheet/formatDataToSpreadsheet";
 
 export type TransformedData = {
     freePracticeOne: string[][];
@@ -11,6 +11,7 @@ export type TransformedData = {
     qualy: string[][];
     race: string[][];
     partialRace: string[][];
+    partialSprint: string[][];
     isSprintWeekend: boolean;
 }
 
@@ -24,6 +25,7 @@ export const transformRaceResultsData = async (data: ResultData | null) => {
         qualy: [] as string[][],
         race: [] as string[][],
         partialRace: [] as string[][],
+        partialSprint: [] as string[][],
         isSprintWeekend: false
     }
 
@@ -58,6 +60,9 @@ export const transformRaceResultsData = async (data: ResultData | null) => {
             const transformedSprintData = transformSprintData(data.sprintQualyData, data.sprintData);
             const spreadSheetData = formatSprintForSheets(transformedSprintData);
             transformedData.sprint = spreadSheetData;
+
+            const spreadsheetPartialSprintData = formatPartialSprintForSheets(transformedSprintData);
+            transformedData.partialSprint = spreadsheetPartialSprintData;
         }
     }
 
@@ -71,12 +76,9 @@ export const transformRaceResultsData = async (data: ResultData | null) => {
         const transformedRaceData = transformRaceData(data.qualyData, data.raceData);
         const spreadSheetData = formatRaceForSheets(transformedRaceData);
         transformedData.race = spreadSheetData;
-    }
 
-    if (data?.raceData) {
-        const transformedRaceData = transformRaceData(data.qualyData, data.raceData);
-        const spreadSheetData = formatPartialRaceForSheets(transformedRaceData);
-        transformedData.partialRace = spreadSheetData;
+        const spreadSheetPartialRaceData = formatPartialRaceForSheets(transformedRaceData);
+        transformedData.partialRace = spreadSheetPartialRaceData;
     }
 
     return transformedData;

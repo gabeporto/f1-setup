@@ -74,6 +74,12 @@ export function formatPartialRaceForSheets(data: RaceData) {
     return top12DriversWithPole.map(driverAcronym => [driverAcronym]);
 }
 
+export function formatPartialSprintForSheets(data: SprintData) {
+    const poleDriver = data.pole.driverAcronym;
+    const top12DriversWithPole = [poleDriver, ...data.sprint.slice(0, 12).map(({ driverAcronym }) => driverAcronym)];
+    return top12DriversWithPole.map(driverAcronym => [driverAcronym]);
+}
+
 export const transformDataToUpdateSheet = (sheetName: string, transformedData: TransformedData) => {
     const dataToUpdate = [];
 
@@ -95,6 +101,9 @@ export const transformDataToUpdateSheet = (sheetName: string, transformedData: T
         }
         if (transformedData.partialRace) {
             dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.partialRace, values: transformedData.partialRace });
+        }
+        if (transformedData.partialSprint) {
+            dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.partialSprint, values: transformedData.partialSprint });
         }
     } else {
         if (transformedData.freePracticeOne) {
