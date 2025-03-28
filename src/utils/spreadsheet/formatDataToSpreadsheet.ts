@@ -1,5 +1,6 @@
 import { TransformedData } from "@/services/transform/transformRaceResultsData";
 import { RACE_WITH_SPRINT_RANGE, RACE_WITHOUT_SPRINT_RANGE } from "./racesRange";
+import { DRIVERS, TEAMS } from "./formulaOneNomenclatures";
 
 type DriverPositionEntry = {
     position: number;
@@ -36,19 +37,35 @@ type RaceData = {
 };
 
 export function formatDataForSheets(data: PracticeData) {
-    return data.practice.map(({ driver, team, time }) => [driver, team, time]);
+    return data.practice.map(({ driver, team, time }) => [ 
+        DRIVERS[driver] || driver, 
+        TEAMS[team] || team, 
+        time
+    ]);
 }
 
 export function formatQualyForSheets(data: QualyData) {
-    return data.qualy.map(({ driver, team, time }) => [driver, team, time]);
+    return data.qualy.map(({ driver, team, time }) => [
+        DRIVERS[driver] || driver, 
+        TEAMS[team] || team, 
+        time
+    ]);
 }
 
 export function formatSprintForSheets(data: SprintData) {
-    return data.sprint.map(({ driver, team, time }) => [driver, team, time]);
+    return data.sprint.map(({ driver, team, time }) => [
+        DRIVERS[driver] || driver, 
+        TEAMS[team] || team, 
+        time
+    ]);
 }
 
 export function formatRaceForSheets(data: RaceData) {
-    return data.race.map(({ driver, team, time }) => [driver, team, time]);
+    return data.race.map(({ driver, team, time }) => [
+        DRIVERS[driver] || driver, 
+        TEAMS[team] || team, 
+        time
+    ]);
 }
 
 export const transformDataToUpdateSheet = (sheetName: string, transformedData: TransformedData) => {
