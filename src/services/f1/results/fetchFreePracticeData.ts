@@ -8,10 +8,11 @@ export const fetchFreePracticeData = async (year: number, raceNumber: number, pr
         const response = await axiosInstance.get(url);
         return response.data;
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            throw new Error(error.response?.data?.message || 'Erro ao buscar dados do treino livre');
-        } else {
-            throw new Error('Erro desconhecido ao buscar dados do treino livre');
-        }
+        return null;
+        // if (axios.isAxiosError(error)) {
+        //     throw new Error(error.response?.data?.message || 'Erro ao buscar dados do treino livre');
+        // } else {
+        //     throw new Error('Erro desconhecido ao buscar dados do treino livre');
+        // }
     }
 };

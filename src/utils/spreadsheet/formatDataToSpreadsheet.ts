@@ -126,5 +126,7 @@ export const transformDataToUpdateSheet = (sheetName: string, transformedData: T
         }
     }
 
-    return dataToUpdate;
+    const filteredData = dataToUpdate.filter(item => item.values && item.values.length > 0);
+
+    return filteredData;
 }

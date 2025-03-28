@@ -13,19 +13,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const { year, raceNumber, sheetName } = req.body as { year: number; raceNumber: number; sheetName: string };
 
-    const resultsData : (ResultData | null) = await fetchRaceResults(year, raceNumber); 
+    const resultsData: (ResultData | null) = await fetchRaceResults(year, raceNumber);
     const transformedData = await transformRaceResultsData(resultsData);
     const dataToUpdate = transformDataToUpdateSheet(sheetName, transformedData);
 
-    await sheets.spreadsheets.values.batchUpdate({
-      spreadsheetId: SPREADSHEET_ID,
-      requestBody: {
-        valueInputOption: "RAW",
-        data: dataToUpdate,
-      },
-    });
+    if (dataToUpdate && dataToUpdate.length) {
+      await sheets.spreadsheets.values.batchUpdate({
+        spreadsheetId: SPREADSHEET_ID,
+        requestBody: {
+          valueInputOption: "RAW",
+          data: dataToUpdate,
+        },
+      });
 
-    return res.status(200).json({ message: "Planilha atualizada com sucesso!" });
+      return res.status(200).json({ message: "Planilha atualizada com sucesso!" });
+    }
+
+    return res.status(200).json({ message: "Nenhum dado disponível para atualização!" });
+
   } catch (error) {
     console.error("Erro ao atualizar planilha:", error);
     return res.status(500).json({ error: "Erro ao atualizar planilha." });

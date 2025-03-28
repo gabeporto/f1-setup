@@ -8,10 +8,11 @@ export const fetchSprintData = async (year: number, raceNumber: number, raceType
         const response = await axiosInstance.get(url);
         return response.data;
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            throw new Error(error.response?.data?.message || 'Erro ao buscar dados da corrida sprint');
-        } else {
-            throw new Error('Erro desconhecido ao buscar dados da corrida sprint');
-        }
+        return null;
+        // if (axios.isAxiosError(error)) {
+        //     throw new Error(error.response?.data?.message || 'Erro ao buscar dados da corrida sprint');
+        // } else {
+        //     throw new Error('Erro desconhecido ao buscar dados da corrida sprint');
+        // }
     }
 };
