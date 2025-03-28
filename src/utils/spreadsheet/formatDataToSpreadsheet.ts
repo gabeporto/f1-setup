@@ -71,31 +71,38 @@ export function formatRaceForSheets(data: RaceData) {
 export const transformDataToUpdateSheet = (sheetName: string, transformedData: TransformedData) => {
     const dataToUpdate = [];
 
-    if (transformedData.freePracticeOne) {
-        dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.fp1, values: transformedData.freePracticeOne });
-    }
-
     if (transformedData.isSprintWeekend) {
+        if (transformedData.freePracticeOne) {
+            dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.fp1, values: transformedData.freePracticeOne });
+        }
         if (transformedData.sprintQualy) {
             dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.sprintQualy, values: transformedData.sprintQualy });
         }
         if (transformedData.sprint) {
             dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.sprint, values: transformedData.sprint });
         }
+        if (transformedData.qualy) {
+            dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.qualy, values: transformedData.qualy });
+        }
+        if (transformedData.race) {
+            dataToUpdate.push({ range: sheetName + RACE_WITH_SPRINT_RANGE.race, values: transformedData.race });
+        }
     } else {
+        if (transformedData.freePracticeOne) {
+            dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.fp1, values: transformedData.freePracticeOne });
+        }
         if (transformedData.freePracticeTwo) {
             dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.fp2, values: transformedData.freePracticeTwo });
         }
         if (transformedData.freePracticeThree) {
             dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.fp3, values: transformedData.freePracticeThree });
         }
-    }
-
-    if (transformedData.qualy) {
-        dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.qualy, values: transformedData.qualy });
-    }
-    if (transformedData.race) {
-        dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.race, values: transformedData.race });
+        if (transformedData.qualy) {
+            dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.qualy, values: transformedData.qualy });
+        }
+        if (transformedData.race) {
+            dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.race, values: transformedData.race });
+        }
     }
 
     return dataToUpdate;
