@@ -1,4 +1,3 @@
-import axios from 'axios';
 import axiosInstance from '../../../utils/axios/axiosInstance';
 
 export const fetchFreePracticeData = async (year: number, raceNumber: number, practiceNumber: number) => {
@@ -7,12 +6,7 @@ export const fetchFreePracticeData = async (year: number, raceNumber: number, pr
     try {
         const response = await axiosInstance.get(url);
         return response.data;
-    } catch (error) {
+    } catch (_) {
         return null;
-        // if (axios.isAxiosError(error)) {
-        //     throw new Error(error.response?.data?.message || 'Erro ao buscar dados do treino livre');
-        // } else {
-        //     throw new Error('Erro desconhecido ao buscar dados do treino livre');
-        // }
     }
 };
