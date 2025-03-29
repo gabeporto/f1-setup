@@ -15,6 +15,11 @@ export type TransformedData = {
     isSprintWeekend: boolean;
 }
 
+export type TransformedScoreData = {
+    drivers: string[][];
+    constructors: string[][];
+}
+
 export const transformRaceResultsData = async (data: ResultData | null) => {
     const transformedData = {
         freePracticeOne: [] as string[][],

@@ -46,6 +46,21 @@ type PracticeResult = {
     time: string | null;
 };
 
+type DriverScore = {
+    position: number;
+    driver: Driver;
+    team: Team;
+    wins: number;
+    points: number
+};
+
+type ConstructorScore = {
+    position: number;
+    wins: number;
+    points: number
+    team: Team;
+};
+
 type QualyData = {
     races: {
         qualyResults: QualyResult[];
@@ -73,6 +88,14 @@ type SprintData = {
 type FreePracticeData = {
     races: Record<string, PracticeResult[]>;
 };
+
+type DriverScoreData = {
+    drivers_championship: DriverScore[];
+};
+
+type ConstructorScoreData = {
+    constructors_championship: ConstructorScore[];
+}
 
 export const transformRaceData = (qualyData: QualyData, raceData: RaceData) => {
     const formattedPoleResult = {
@@ -198,5 +221,33 @@ export const transformFreePracticeData = (freePracticeData: FreePracticeData, pr
 
     return {
         practice: finalResults,
+    };
+};
+
+export const transformDriverScoreData = (driverScoreData: DriverScoreData) => {
+    const formattedDriverScore = driverScoreData.drivers_championship.map((item: any) => ({
+        position: item.position,
+        driver: item.driver.name + " " + item.driver.surname,
+        driverAcronym: item.driver.shortName,
+        team: item.team.teamName,
+        wins: item.wins,
+        points: item.points,
+    }));
+
+    return {
+        drivers: formattedDriverScore
+    };
+};
+
+export const transformConstructorScoreData = (constructorScoreData: ConstructorScoreData) => {
+    const formattedConstructorScore = constructorScoreData.constructors_championship.map((item: any) => ({
+        position: item.position,
+        points: item.points,
+        wins: item.wins,
+        team: item.team.teamName,
+    }));
+
+    return {
+        constructors: formattedConstructorScore
     };
 };

@@ -1,7 +1,7 @@
 import axiosF1Instance from '../../../utils/axios/axiosInstance';
 
-export const fetchRaceData = async (year: number, raceNumber: number, raceType: string) => {
-    const url = `/${year}/${raceNumber}/${raceType}`;
+export const fetchScore = async (year: number, type: string) => {
+    const url = `/${year}/${type}-championship`;
 
     try {
         const response = await axiosF1Instance.get(url);

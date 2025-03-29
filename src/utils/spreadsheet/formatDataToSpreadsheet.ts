@@ -1,5 +1,5 @@
-import { TransformedData } from "@/services/transform/transformRaceResultsData";
-import { RACE_WITH_SPRINT_RANGE, RACE_WITHOUT_SPRINT_RANGE } from "./racesRange";
+import { TransformedData, TransformedScoreData } from "@/services/transform/transformRaceResultsData";
+import { RACE_WITH_SPRINT_RANGE, RACE_WITHOUT_SPRINT_RANGE, SCORE_LEADERBOARD } from "./spreadsheetRanges";
 import { DRIVERS, TEAMS } from "./formulaOneNomenclatures";
 
 type DriverPositionEntry = {
@@ -8,6 +8,22 @@ type DriverPositionEntry = {
     driverAcronym: string;
     team: string;
     time: string;
+};
+
+type DriverScoreEntry = {
+    position: number;
+    wins: number;
+    points: number;
+    driver: string;
+    driverAcronym: string;
+    team: string;
+};
+
+type ConstructorScoreEntry = {
+    position: number;
+    wins: number;
+    points: number;
+    team: string;
 };
 
 type PoleEntry = {
@@ -34,6 +50,14 @@ type SprintData = {
 type RaceData = {
     pole: PoleEntry;
     race: DriverPositionEntry[];
+};
+
+type DriversScoreData = {
+    drivers: DriverScoreEntry[];
+};
+
+type ConstrcutorScoreData = {
+    constructors: ConstructorScoreEntry[];
 };
 
 export function formatDataForSheets(data: PracticeData) {
@@ -74,11 +98,31 @@ export function formatPartialRaceForSheets(data: RaceData) {
     return top12DriversWithPole.map(driverAcronym => [driverAcronym]);
 }
 
+export function formatDriverScoreDataForSheets(data: DriversScoreData) {
+    return data.drivers.map(({ position, driver, team, wins, points}) => [
+        position ? position.toString() : "-",
+        DRIVERS[driver] || driver, 
+        TEAMS[team] || team,
+        wins ? wins.toString() : "0",
+        points ? points.toString() : "0"
+    ]);
+}
+
+export function formatConstructorScoreDataForSheets(data: ConstrcutorScoreData) {
+    return data.constructors.map(({ position, team, wins, points}) => [
+        position ? position.toString() : "-",
+        TEAMS[team] || team,
+        wins ? wins.toString() : "0",
+        points ? points.toString() : "0"
+    ]);
+}
+
 export function formatPartialSprintForSheets(data: SprintData) {
     const poleDriver = data.pole.driverAcronym;
     const top12DriversWithPole = [poleDriver, ...data.sprint.slice(0, 12).map(({ driverAcronym }) => driverAcronym)];
     return top12DriversWithPole.map(driverAcronym => [driverAcronym]);
 }
+
 
 export const transformDataToUpdateSheet = (sheetName: string, transformedData: TransformedData) => {
     const dataToUpdate = [];
@@ -124,6 +168,21 @@ export const transformDataToUpdateSheet = (sheetName: string, transformedData: T
         if (transformedData.partialRace) {
             dataToUpdate.push({ range: sheetName + RACE_WITHOUT_SPRINT_RANGE.partialRace, values: transformedData.partialRace });
         }
+    }
+
+    const filteredData = dataToUpdate.filter(item => item.values && item.values.length > 0);
+
+    return filteredData;
+}
+
+export const transformScoreDataToUpdateSheet = (sheetName: string, transformedData: TransformedScoreData) => {
+    const dataToUpdate = [];
+
+    if (transformedData.drivers) {
+        dataToUpdate.push({ range: sheetName + SCORE_LEADERBOARD.drivers, values: transformedData.drivers });
+    }
+    if (transformedData.constructors) {
+        dataToUpdate.push({ range: sheetName + SCORE_LEADERBOARD.constructors, values: transformedData.constructors });
     }
 
     const filteredData = dataToUpdate.filter(item => item.values && item.values.length > 0);
