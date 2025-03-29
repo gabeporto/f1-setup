@@ -1,5 +1,3 @@
-import { drive } from "googleapis/build/src/apis/drive"
-
 export const RACE_WITHOUT_SPRINT_RANGE = {
     fp1: "!C24:E43",
     fp2: "!H24:J43",

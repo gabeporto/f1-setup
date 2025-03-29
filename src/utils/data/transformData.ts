@@ -225,7 +225,7 @@ export const transformFreePracticeData = (freePracticeData: FreePracticeData, pr
 };
 
 export const transformDriverScoreData = (driverScoreData: DriverScoreData) => {
-    const formattedDriverScore = driverScoreData.drivers_championship.map((item: any) => ({
+    const formattedDriverScore = driverScoreData.drivers_championship.map((item) => ({
         position: item.position,
         driver: item.driver.name + " " + item.driver.surname,
         driverAcronym: item.driver.shortName,
@@ -240,7 +240,7 @@ export const transformDriverScoreData = (driverScoreData: DriverScoreData) => {
 };
 
 export const transformConstructorScoreData = (constructorScoreData: ConstructorScoreData) => {
-    const formattedConstructorScore = constructorScoreData.constructors_championship.map((item: any) => ({
+    const formattedConstructorScore = constructorScoreData.constructors_championship.map((item) => ({
         position: item.position,
         points: item.points,
         wins: item.wins,

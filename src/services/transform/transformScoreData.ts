@@ -1,6 +1,6 @@
 ;import { ScoreData } from "@/types/scoreDataType";
-import { transformConstructorScoreData, transformDriverScoreData, transformFreePracticeData, transformQualyData, transformRaceData, transformSprintData, transformSprintQualyData } from "@/utils/data/transformData";
-import { formatConstructorScoreDataForSheets, formatDataForSheets, formatDriverScoreDataForSheets, formatPartialRaceForSheets, formatPartialSprintForSheets, formatQualyForSheets, formatRaceForSheets, formatSprintForSheets } from "@/utils/spreadsheet/formatDataToSpreadsheet";
+import { transformConstructorScoreData, transformDriverScoreData } from "@/utils/data/transformData";
+import { formatConstructorScoreDataForSheets, formatDriverScoreDataForSheets } from "@/utils/spreadsheet/formatDataToSpreadsheet";
 
 export type TransformedData = {
     drivers: string[][];
