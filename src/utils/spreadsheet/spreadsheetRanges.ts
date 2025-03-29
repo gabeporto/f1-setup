@@ -1,3 +1,5 @@
+import { drive } from "googleapis/build/src/apis/drive"
+
 export const RACE_WITHOUT_SPRINT_RANGE = {
     fp1: "!C24:E43",
     fp2: "!H24:J43",
@@ -6,6 +8,7 @@ export const RACE_WITHOUT_SPRINT_RANGE = {
     race: "!W24:Y43",
     partialRace: "!X6:X18"
 }
+
 export const RACE_WITH_SPRINT_RANGE = {
     fp1: "!C24:E43",
     sprintQualy: "!H24:J43",
@@ -14,4 +17,9 @@ export const RACE_WITH_SPRINT_RANGE = {
     race: "!W24:Y43",
     partialRace: "!X6:X18",
     partialSprint: "!AB6:AB18"
+}
+
+export const SCORE_LEADERBOARD = {
+    drivers: "!B6:F25",
+    constructors: "!H6:ZK15",
 }
