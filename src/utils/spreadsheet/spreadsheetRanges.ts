@@ -18,6 +18,6 @@ export const RACE_WITH_SPRINT_RANGE = {
 }
 
 export const SCORE_LEADERBOARD = {
-    drivers: "!B6:F25",
+    drivers: "!B6:F26",
     constructors: "!H6:ZK15",
 }
