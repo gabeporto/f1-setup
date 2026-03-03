@@ -6,7 +6,7 @@ import { fetchRaceData } from "./results/fetchRaceData";
 export const fetchRaceResults = async (year: number, raceNumber: number) => {
 
     if(!raceNumber || raceNumber <= 0 || raceNumber > 24) return null;
-    if(!year) year = 2025;
+    if(!year) year = 2026;
 
     // SPRINT
     if(RACES_WITH_SPRINT.includes(raceNumber)) {   

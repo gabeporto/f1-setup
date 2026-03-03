@@ -1,8 +1,8 @@
-export const RACES_WITH_SPRINT = [2, 6, 13, 19, 21, 23]
+export const RACES_WITH_SPRINT = [2, 6, 7, 11, 14, 18]
 
 // 2 : China
 // 6 : Miami
-// 13 : Belgium
-// 19 : United States
-// 21 : Brazil
-// 23 : Qatar
+// 7 : Canada
+// 11 : Silverstone
+// 14 : Netherlands
+// 18 : Singapore

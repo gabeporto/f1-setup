@@ -1,24 +1,36 @@
 export const DRIVERS : Record<string, string> = {
     "Lewis Hamilton"        : "Lewis Hamilton",
-    "Max Verstappen"        : "Max Verstappen",
-    "Oscar Piastri"         : "Oscar Piastri",
     "Charles Leclerc"       : "Charles Leclerc",
-    "George Russell"        : "George Russell",
-    "Lando Norris"          : "Lando Norris",
-    "Andrea Kimi Antonelli" : "Kimi Antonelli",
-    "Yuki Tsunoda"          : "Yuki Tsunoda",
-    "Alex Albon"            : "Alexander Albon",
-    "Lance Stroll"          : "Lance Stroll",
-    "Fernando Alonso"       : "Fernando Alonso",
-    "Oliver Bearman"        : "Oliver Bearman",
-    "Carlos Sainz"          : "Carlos Sainz",
-    "Gabriel Bortoleto"     : "Gabriel Bortoleto",
+
+    "Max Verstappen"        : "Max Verstappen",
     "Isack Hadjar"          : "Isack Hadjar",
-    "Jack Doohan"           : "Jack Doohan",
-    "Pierre Gasly"          : "Pierre Gasly",
+
+    "Lando Norris"          : "Lando Norris",
+    "Oscar Piastri"         : "Oscar Piastri",
+
+    "George Russell"        : "George Russell",
+    "Andrea Kimi Antonelli" : "Kimi Antonelli",
+
+    "Liam Lawson"           : "Liam Lawson",
+    "Arvid Lindblad"        : "Arvid Lindblad",
+
+    "Carlos Sainz"          : "Carlos Sainz",
+    "Alex Albon"            : "Alexander Albon",
+
+    "Fernando Alonso"       : "Fernando Alonso",
+    "Lance Stroll"          : "Lance Stroll",
+    
+    "Oliver Bearman"        : "Oliver Bearman",
     "Esteban Ocon"          : "Esteban Ocon",
+    
+    "Gabriel Bortoleto"     : "Gabriel Bortoleto",
     "Nico Hulkenberg"       : "Nico Hülkenberg",
-    "Liam Lawson"           : "Liam Lawson"
+    
+    "Pierre Gasly"          : "Pierre Gasly",
+    "Franco Colapinto"      : "Franco Colapinto",
+    
+    "Sergio Pérez"          : "Sergio Pérez",
+    "Valtteri Bottas"       : "Valtteri Bottas",
 }
 
 export const TEAMS : Record<string, string>= {
@@ -30,6 +42,7 @@ export const TEAMS : Record<string, string>= {
     "Williams Racing"         : "Williams",
     "Aston Martin F1 Team"    : "Aston Martin",
     "Haas F1 Team"            : "Haas",
-    "Sauber F1 Team"          : "Sauber",
-    "Alpine F1 Team"          : "Alpine"
+    "Audi F1 Team"            : "Audi",
+    "Alpine F1 Team"          : "Alpine",
+    "Cadillac F1 Team"        : "Cadillac"
 }
