@@ -42,7 +42,7 @@ export const TEAMS : Record<string, string>= {
     "Williams Racing"         : "Williams",
     "Aston Martin F1 Team"    : "Aston Martin",
     "Haas F1 Team"            : "Haas",
-    "Audi F1 Team"            : "Audi",
+    "Audi Revolut F1 Team"    : "Audi",
     "Alpine F1 Team"          : "Alpine",
-    "Cadillac F1 Team"        : "Cadillac"
+    "Cadillac Formula 1 Team" : "Cadillac"
 }
