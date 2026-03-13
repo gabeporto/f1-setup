@@ -1,18 +1,18 @@
 export const RACE_WITHOUT_SPRINT_RANGE = {
-    fp1: "!C24:E43",
-    fp2: "!H24:J43",
-    fp3: "!M24:O43",
-    qualy: "!R24:T43",
-    race: "!W24:Y43",
+    fp1: "!C24:E45",
+    fp2: "!H24:J45",
+    fp3: "!M24:O45",
+    qualy: "!R24:T45",
+    race: "!W24:Y45",
     partialRace: "!X6:X18"
 }
 
 export const RACE_WITH_SPRINT_RANGE = {
-    fp1: "!C24:E43",
-    sprintQualy: "!H24:J43",
-    sprint: "!M24:O43",
-    qualy: "!R24:T43",
-    race: "!W24:Y43",
+    fp1: "!C24:E45",
+    sprintQualy: "!H24:J45",
+    sprint: "!M24:O45",
+    qualy: "!R24:T45",
+    race: "!W24:Y45",
     partialRace: "!X6:X18",
     partialSprint: "!AB6:AB18"
 }
